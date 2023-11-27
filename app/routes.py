@@ -64,6 +64,7 @@ def notification():
         notification.submitted_date = datetime.utcnow()
 
         try:
+            logging.error(f"submitted_date: {notification.submitted_date}")
             db.session.add(notification)
             db.session.commit()
 
