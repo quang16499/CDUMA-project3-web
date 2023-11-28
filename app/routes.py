@@ -64,7 +64,6 @@ def notification():
         notification.submitted_date = datetime.utcnow()
 
         try:
-            logging.error(f"submitted_date: {notification.submitted_date}")
             db.session.add(notification)
             db.session.commit()
 
@@ -77,7 +76,7 @@ def notification():
                 with client.get_queue_sender(queueName) as sender:
                     message = ServiceBusMessage(str(notificationId))
                     sender.send_messages(message)
-                    logging.error(f"Notification ID {str(notificationId)}: Message '{message}' sent to queue '{queueName}'")
+                    logging.info(f"Notification ID {str(notificationId)}: Message '{message}' sent to queue '{queueName}'")
 
             return redirect('/Notifications')
         except :
